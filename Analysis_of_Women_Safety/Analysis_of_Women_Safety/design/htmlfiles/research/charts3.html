@@ -1,0 +1,93 @@
+
+{% block mainblock %}
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Comparision of Products Based on Sentiments"
+	},
+	axisY: {
+		title: "Ratings"
+	},
+	data: [{
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "#51419C",
+		legendText: "Positive",
+		dataPoints: [
+		{% for dd in d1 %}
+			{ y: {{dd.dcount}}, label: "{{dd.topics}}"},
+		{% endfor %}
+		]
+	},
+    {
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "green",
+		legendText: "Negative",
+		dataPoints: [
+		{% for dd in d2 %}
+			{ y: {{dd.dcount}}, label: "{{dd.topics}}"},
+		{% endfor %}
+		]
+	},
+	{
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "red",
+		legendText: "Age>25",
+		dataPoints: [
+		{% for dd in d4 %}
+			{ y: {{dd.dcount}}, label: "{{dd.age}}"},
+		{% endfor %}
+		]
+	},
+	{
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "lightblue",
+		legendText: "Age<25",
+		dataPoints: [
+		{% for dd in d5 %}
+			{ y: {{dd.dcount}}, label: "{{dd.age}}"},
+		{% endfor %}
+		]
+	},
+	{
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "pink",
+		legendText: "Public",
+		dataPoints: [
+		{% for dd in d6 %}
+			{ y: {{dd.dcount}}, label: "{{dd.transport}}"},
+		{% endfor %}
+		]
+	},
+	{
+		type: "column",
+		showInLegend: true,
+		legendMarkerColor: "lightgreen",
+		legendText: "Private",
+		dataPoints: [
+		{% for dd in d7 %}
+			{ y: {{dd.dcount}}, label: "{{dd.transport}}"},
+		{% endfor %}
+		]
+	}
+	]
+});
+chart.render();
+
+}
+</script>
+
+</script>
+
+<div id="chartContainer" style="height: 500px; width: 800px;margin-top:-10px;margin-left:330px"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+{% endblock %}
